@@ -27,42 +27,6 @@ bot.remove_command('help')
 testcounter = 0
 
 
-# def getCookies():
-#     options = Options()
-#     options.headless = False
-#     driver = webdriver.Chrome(executable_path = "C:\\Users\Dominick\Desktop\chromedriver.exe", options = options)
-
-#     driver.get('https://medium.com/m/signin')
-
-#     driver.find_element_by_id("email-susi-button-text").click()
-
-#     window = driver.window_handles[1].replace('CDwindow-', '')
-
-#     driver.switch_to.window(driver.window_handles[1])
-
-#     try:
-#         #inputdiv = driver.find_element_by_xpath('//aria-label[1]')
-#         #inputdiv = driver.find_element_by_class_name('bs b bt bu dj')
-#         #inputdiv = driver.find_element_by_tag_name('input')
-#         #inputdiv = driver.find_element_by_class_name('eo al')
-#         inputdiv = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, 'eo al')))
-
-#         print('Success')
-#     except NoSuchElementException:
-#         print('Element not found')
-
-#     print(driver.page_source)
-
-#     print(inputdiv.get_property('class'))
-    
-    #driver.find_element_by_xpath("//input[1]").click()
-
-    #driver.find_element_by_xpath('//input[1]').send_keys('arknv@protonmail.com')
-
-    #print(driver.page_source)
-
-    #driver.find_element_by_class_name('bs b bt bu dj').send_keys(arknv@protonmail.com)
-
 def pushTag(tag):
     db.create_collection(tag)
 
@@ -93,7 +57,6 @@ def searchtags(tag):
         'upgrade-insecure-requests' : '1',
         'user-agent' : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Mobile Safari/537.36'
     }
-    driver = webdriver.Chrome(executable_path = "C:\\Users\Dominick\Desktop\chromedriver.exe", options = options)
 
     request = re.get('https://medium.com/tag/' + tag + '/latest', headers= headers)
     
