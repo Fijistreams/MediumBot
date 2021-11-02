@@ -1,0 +1,4 @@
+pymongo==3.11.4
+discord.py==1.7.3
+requests==2.26.0
+beautifulsoup4==4.9.3
