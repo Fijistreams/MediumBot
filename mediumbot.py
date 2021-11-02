@@ -18,8 +18,8 @@ options.headless = True
 channel = None
 
 mediumbottoken = os.getenv('medium-bot-token')
-mediumclientid = os.getenv('medium-client-id')
-mediumclientsecret = os.getenv('medium-client-secret')
+#mediumclientid = os.getenv('medium-client-id')
+#mediumclientsecret = os.getenv('medium-client-secret')
 mediumdburl = os.getenv('medium-db-url')
 
 client = pymongo.MongoClient(mediumdburl)
