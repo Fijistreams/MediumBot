@@ -100,13 +100,14 @@ async def hello(ctx):
     await ctx.channel.send('Hello!')
 
 @bot.command()
-async def help():
+async def help(ctx):
     embed = discord.Embed(
         colour = discord.Colour.orange(),
         title = 'Help'
     )
     embed.add_field(name='!addTag tag', value='Adds a Medium tag for the bot to monitor. Bot will post articles published after the time of adding the tag', inline = False)
     embed.add_field(name='!removeTag tag', value ='Removes a tag from the list of tags to be monitored')
+    await ctx.channel.send(embed=embed)
 
 def test():
     chan = None
@@ -129,10 +130,11 @@ async def search():
     print(listoflinks)
     
     for x in listoflinks:
-        stringoflinks = stringoflinks + x +'\n'
+        await(channel.send(x))
+   #     stringoflinks = stringoflinks + x +'\n'
 
-    if(len(stringoflinks) < 4000 and len(stringoflinks) > 0):
-        await(channel.send(stringoflinks))
+  #  if(len(stringoflinks) < 4000 and len(stringoflinks) > 0):
+  #      await(channel.send(stringoflinks))
 
 if testcounter == 0:
     bot.run(mediumbottoken)
