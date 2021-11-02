@@ -1,1 +1,1 @@
-worker: python Leaderboard.py 
+worker: python Leaderboard.py p
