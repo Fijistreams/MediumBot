@@ -1,20 +1,14 @@
 import requests as re
 from bs4 import BeautifulSoup
 import pymongo
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 import os
 import discord
 from discord.ext import commands, tasks 
 import datetime
 
 
-options = Options()
-options.headless = True
+# options = Options()
+# options.headless = True
 channel = None
 
 mediumbottoken = os.getenv('medium-bot-token')
@@ -33,34 +27,34 @@ bot.remove_command('help')
 testcounter = 0
 
 
-def getCookies():
-    options = Options()
-    options.headless = False
-    driver = webdriver.Chrome(executable_path = "C:\\Users\Dominick\Desktop\chromedriver.exe", options = options)
+# def getCookies():
+#     options = Options()
+#     options.headless = False
+#     driver = webdriver.Chrome(executable_path = "C:\\Users\Dominick\Desktop\chromedriver.exe", options = options)
 
-    driver.get('https://medium.com/m/signin')
+#     driver.get('https://medium.com/m/signin')
 
-    driver.find_element_by_id("email-susi-button-text").click()
+#     driver.find_element_by_id("email-susi-button-text").click()
 
-    window = driver.window_handles[1].replace('CDwindow-', '')
+#     window = driver.window_handles[1].replace('CDwindow-', '')
 
-    driver.switch_to.window(driver.window_handles[1])
+#     driver.switch_to.window(driver.window_handles[1])
 
-    try:
-        #inputdiv = driver.find_element_by_xpath('//aria-label[1]')
-        #inputdiv = driver.find_element_by_class_name('bs b bt bu dj')
-        #inputdiv = driver.find_element_by_tag_name('input')
-        #inputdiv = driver.find_element_by_class_name('eo al')
-        inputdiv = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, 'eo al')))
+#     try:
+#         #inputdiv = driver.find_element_by_xpath('//aria-label[1]')
+#         #inputdiv = driver.find_element_by_class_name('bs b bt bu dj')
+#         #inputdiv = driver.find_element_by_tag_name('input')
+#         #inputdiv = driver.find_element_by_class_name('eo al')
+#         inputdiv = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, 'eo al')))
 
-        print('Success')
-    except NoSuchElementException:
-        print('Element not found')
+#         print('Success')
+#     except NoSuchElementException:
+#         print('Element not found')
 
-    print(driver.page_source)
+#     print(driver.page_source)
 
-    print(inputdiv.get_property('class'))
-    print('bullshit')
+#     print(inputdiv.get_property('class'))
+    
     #driver.find_element_by_xpath("//input[1]").click()
 
     #driver.find_element_by_xpath('//input[1]').send_keys('arknv@protonmail.com')
