@@ -3,3 +3,4 @@ discord.py==1.7.3
 requests==2.26.0
 beautifulsoup4==4.9.3
 dnspython==2.1.0
+selenium 3.141.0
