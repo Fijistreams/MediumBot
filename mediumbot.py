@@ -17,7 +17,7 @@ import time
 
 # options = Options()
 # options.headless = True
-channel = None
+channel = 902770468954734652
 
 mediumbottoken = os.getenv('mediumbottoken')
 #mediumclientid = os.getenv('medium-client-id')
@@ -34,6 +34,7 @@ intents = discord.Intents.all()
 #intents.members = True
 bot = commands.Bot(command_prefix='!', intents = intents)
 bot.remove_command('help')
+outputchannel = bot.get_channel(channel)
 testcounter = 0
 
 
@@ -227,8 +228,10 @@ async def help(ctx):
         colour = discord.Colour.orange(),
         title = 'Help'
     )
+    embed.add_field(name='Format', value='Keep tag names all lowercase when adding.')
     embed.add_field(name='!addTag tag', value='Adds a Medium tag for the bot to monitor. Bot will post articles published after the time of adding the tag', inline = False)
-    embed.add_field(name='!removeTag tag', value ='Removes a tag from the list of tags to be monitored')
+    embed.add_field(name='!removeTag tag', value ='Removes a tag from the list of tags to be monitored', inline=False)
+    embed.add_field(name='!listTags', value='Lists all of the tags currently being monitored', inline=False)
     await ctx.channel.send(embed=embed)
 
 def test():
@@ -238,7 +241,7 @@ def test():
 
 @tasks.loop(seconds = 60 * 60)
 async def search():
-    global channel
+    global outputchannel
     global mediumbottoken
     taglist = db.list_collection_names()
     print(taglist)
@@ -252,14 +255,14 @@ async def search():
 
     print(listoflinks)
     
-    #for x in listoflinks:
+    for x in listoflinks:
         #await(channel.send(x))
 
 
-   #     stringoflinks = stringoflinks + x +'\n'
+        stringoflinks = stringoflinks + x +'\n'
 
-  #  if(len(stringoflinks) < 4000 and len(stringoflinks) > 0):
-  #      await(channel.send(stringoflinks))
+    if(len(stringoflinks) < 4000 and len(stringoflinks) > 0):
+        await(outputchannel.send(stringoflinks))
 
 if testcounter == 0:
     bot.run(mediumbottoken)
