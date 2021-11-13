@@ -213,7 +213,7 @@ async def hello(ctx):
 @bot.command()
 async def listTags(ctx):
     global db
-    collectionlist = db.list_collection_names
+    collectionlist = db.list_collection_names()
     collectionstring = ''
 
     for x in collectionlist:
