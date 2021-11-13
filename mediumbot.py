@@ -217,7 +217,7 @@ async def listTags(ctx):
     collectionstring = ''
 
     for x in collectionlist:
-        collectionstring - collectionstring + x +'\n'
+        collectionstring = collectionstring + x +'\n'
     await ctx.channel.send(collectionstring)
     
 
