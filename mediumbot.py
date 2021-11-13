@@ -19,10 +19,10 @@ import time
 # options.headless = True
 channel = None
 
-mediumbottoken = os.getenv('medium-bot-token')
+mediumbottoken = os.getenv('mediumbottoken')
 #mediumclientid = os.getenv('medium-client-id')
 #mediumclientsecret = os.getenv('medium-client-secret')
-mediumdburl = os.getenv('medium-db-url')
+mediumdburl = os.getenv('mediumdburl')
 
 
 
@@ -147,7 +147,7 @@ def searchtags(tag):
     listoflinks = []
     testcase = ['gv', 'l']
     
-    #All links to articles are currently have this class value
+    #All links to articles currently have this class value
     for link in soup.find_all('a', class_ = 'er es et eu ev ew ex ey ez fa fb fc fd fe ff'):
         classdict = link.parent.attrs
         try:
@@ -158,7 +158,7 @@ def searchtags(tag):
         #furthermore links without proper https://medium.com must have it added 
         #Links can be the same but have different query values upon each search so
         #query values are removed
-        #All is done if the length of the class value of the href tag is 2. This 
+        #All is done only if the length of the class value of the href containing tag is 2. This 
         #ensures that only links to articles are checked and not that of say a button
             if(len(classdict['class']) == 2):
                 
@@ -170,8 +170,7 @@ def searchtags(tag):
                     check = db[tag].find({'link' : livelink})
                     if(check.count() == 0):
                         db[tag].insert_one({'link' : livelink})
-                        listoflinks.append(livelink)
-                            #print('yo')    
+                        listoflinks.append(livelink)    
         except Exception:
             pass
    
