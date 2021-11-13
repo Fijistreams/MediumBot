@@ -99,13 +99,14 @@ def getTime():
 
 def getHTML(tag):
     options = Options()
-    options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+    #options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
     options.headless = True
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-sh-usage')
     #options.add_argument("window-size=1920,1080")
     #driver = webdriver.Chrome(executable_path = "C:\\Users\Dominick\Desktop\chromedriver.exe", options = options)
-    driver = webdriver.Chrome(executable_path= os.environ.get('CHROMEDRIVER_PATH'), options= options)
+    #driver = webdriver.Chrome(executable_path= os.environ.get('CHROMEDRIVER_PATH'), options= options)
+    driver = webdriver.Chrome(options= options)
     driver.get('https://medium.com/tag/' + tag + '/latest')
     
     last_height = driver.execute_script("return document.body.scrollHeight")
