@@ -108,6 +108,7 @@ def getHTML(tag):
     options.add_argument('enable-automation')
     options.add_argument('--disable-infobars')
     options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--window-size=1420,1080')
     #options.add_argument("window-size=1920,1080")
     #driver = webdriver.Chrome(executable_path = "C:\\Users\Dominick\Desktop\chromedriver.exe", options = options)
     #driver = webdriver.Chrome(executable_path= os.environ.get('CHROMEDRIVER_PATH'), options= options)
