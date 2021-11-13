@@ -192,7 +192,7 @@ async def on_ready():
     global channel
     print(f'{bot.user} has connected to Discord!')
     channel = bot.get_channel(902420735912468490)
-    test()
+    #test()
     if not search.is_running():
         search.start()
 
@@ -209,6 +209,17 @@ async def removeTag(ctx, arg):
 @bot.command()
 async def hello(ctx):
     await ctx.channel.send('Hello!')
+
+@bot.command()
+async def listTags(ctx):
+    global db
+    collectionlist = db.list_collection_names
+    collectionstring = ''
+
+    for x in collectionlist:
+        collectionstring - collectionstring + x +'\n'
+    await ctx.channel.send(collectionstring)
+    
 
 @bot.command()
 async def help(ctx):
