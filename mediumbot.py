@@ -199,12 +199,12 @@ async def on_ready():
 
 @bot.command()
 async def addTag(ctx, arg):
-    pushTag(arg)
+    pushTag(arg.casefold())
     await ctx.channel.send(arg + 'Will now be monitored!')
 
 @bot.command()
 async def removeTag(ctx, arg):
-    deleteTag(arg)
+    deleteTag(arg.casefold())
     await ctx.channel.send(arg + 'Will no longer be monitored')
 
 @bot.command()
