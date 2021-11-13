@@ -228,7 +228,6 @@ async def help(ctx):
         colour = discord.Colour.orange(),
         title = 'Help'
     )
-    embed.add_field(name='Format', value='Keep tag names all lowercase when adding.')
     embed.add_field(name='!addTag tag', value='Adds a Medium tag for the bot to monitor. Bot will post articles published after the time of adding the tag', inline = False)
     embed.add_field(name='!removeTag tag', value ='Removes a tag from the list of tags to be monitored', inline=False)
     embed.add_field(name='!listTags', value='Lists all of the tags currently being monitored', inline=False)
