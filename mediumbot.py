@@ -111,6 +111,7 @@ def getHTML(tag):
     #driver = webdriver.Chrome(executable_path= os.environ.get('CHROMEDRIVER_PATH'), options= options)
     driver = webdriver.Chrome(options= options)
     driver.get('https://medium.com/tag/' + tag + '/latest')
+    print(driver.page_source)
     
     last_height = driver.execute_script("return document.body.scrollHeight")
 
