@@ -34,7 +34,7 @@ intents = discord.Intents.all()
 #intents.members = True
 bot = commands.Bot(command_prefix='!', intents = intents)
 bot.remove_command('help')
-outputchannel = bot.get_channel(channel)
+outputchannel = None
 testcounter = 0
 
 
@@ -191,8 +191,10 @@ def searchtags(tag):
 @bot.event
 async def on_ready():
     global channel
+    global outputchannel
     print(f'{bot.user} has connected to Discord!')
-    channel = bot.get_channel(902420735912468490)
+    #channel = bot.get_channel(902420735912468490)
+    outputchannel = bot.get_channel(channel)
     #test()
     if not search.is_running():
         search.start()
