@@ -36,6 +36,7 @@ bot = commands.Bot(command_prefix='!', intents = intents)
 bot.remove_command('help')
 outputchannel = None
 testcounter = 0
+classcheckcounter = 0
 
 
 def pushTag(tag):
@@ -89,6 +90,37 @@ def predictTagFilter(tag):
         except Exception:
             pass
     return [classstring, outerclassstring]
+
+def findClass():
+    request = re.get('https://medium.com/tag/avax')
+    source = request.content
+    classdict = {}
+
+    soup = BeautifulSoup(source, 'html.parser')
+
+    for a in soup.find_all('a'):
+
+        rawclass = a.get('class')
+        if(rawclass != None):
+            classname = formatClassString(a.get('class'))
+
+            if(classdict.get(classname) == None):
+                classdict.update({classname : 1})
+            else:
+                classdict[classname] += 1
+    value = 0
+    key = ''
+    for k, v in classdict.items():
+        if(v > value):
+            value = v
+    
+    for k, v in classdict.items():
+        if(v == value):
+            key = key + k
+
+    print(classdict)
+    db['tags'].update_one({'name' : 'outerclass'}, {'$set' : {'outerclass' : key}})
+    #return key
 
 def getTime():
     nowdate = datetime.datetime.utcnow()
@@ -159,7 +191,7 @@ def searchtags(tag):
     testcase = ['gv', 'l']
     
     #All links to articles currently have this class value
-    for link in soup.find_all('a', class_ = 'eo ep eq er es et eu ev ew ex ey ez fa fb fc'):
+    for link in soup.find_all('a', class_ = db['tags'].find_one({'name' : 'outerclass'} , {'_id' : 0, 'name' : 0})['outerclass']):
         classdict = link.parent.attrs
         try:
             print(classdict['class'])
@@ -244,6 +276,7 @@ def test():
 async def search():
     global outputchannel
     global mediumbottoken
+    global classcheckcounter
     taglist = db.list_collection_names()
     print(taglist)
     listoflinks = []
@@ -262,8 +295,14 @@ async def search():
 
         stringoflinks = stringoflinks + x +'\n'
 
-    if(len(stringoflinks) < 4000 and len(stringoflinks) > 0):
+    if(len(stringoflinks) < 2000 and len(stringoflinks) > 0):
         await(outputchannel.send(stringoflinks))
+
+    classcheckcounter += 1
+
+    if(classcheckcounter == 5):
+        findClass()
+        classcheckcounter = 0
 
 if testcounter == 0:
     bot.run(mediumbottoken)
