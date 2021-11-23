@@ -159,7 +159,7 @@ def searchtags(tag):
     testcase = ['gv', 'l']
     
     #All links to articles currently have this class value
-    for link in soup.find_all('a', class_ = 'er es et eu ev ew ex ey ez fa fb fc fd fe ff'):
+    for link in soup.find_all('a', class_ = 'eo ep eq er es et eu ev ew ex ey ez fa fb fc'):
         classdict = link.parent.attrs
         try:
             print(classdict['class'])
