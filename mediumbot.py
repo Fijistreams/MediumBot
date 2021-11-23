@@ -41,9 +41,6 @@ classcheckcounter = 0
 
 def pushTag(tag):
     db.create_collection(tag)
-    taglist = predictTagFilter(tag)
-
-    db['tags'].insert_one({'tag' : tag, 'innerclass' : taglist[0], 'outerclass' : taglist[1]})
 
 def deleteTag(tag):
     db.drop_collection(tag)
@@ -59,38 +56,8 @@ def formatClassString(classlist):
             i = i + 1
     return classstring
 
-def predictTagFilter(tag):
-    linkclass = None
-    classstring = ''
-    outerclassstring = ''
-    request = re.get('https://medium.com/tag/' + tag + '/top/year')
-    soup = BeautifulSoup(request.content, 'html.parser')
-    for linkhtml in soup.find_all('a'):
-        #if((linkhtml.attrs['href']).startwith('/m/signin') == False and linkhtml.attrs['href'].startwith('https://medium.com') == False):
-        if(str(linkhtml.get('href')).startswith('/m/signin') == False and str(linkhtml.get('href')).startswith('https://medium.com') == False and str(linkhtml.get('href')).startswith('https') == True):
-            if(linkhtml.get('class') != None):
-                linkclass = linkhtml.get('class')
-                classstring = formatClassString(linkclass)
-                print(classstring)
-                break
-    request2 = re.get('https://medium.com/tag/' + tag + '/latest')
-    soup2 = BeautifulSoup(request2.content, 'html.parser')
 
-    for x in soup2.find_all('a', class_ = classstring):
-        classdict = x.parent.attrs
-        #print('hello')
-        try:
-            linkclass = classdict['class']
-            if(len(linkclass) == 2):
-                outerclassstring = formatClassString(linkclass)
-                print(outerclassstring)
-                break
-
-            
-        except Exception:
-            pass
-    return [classstring, outerclassstring]
-
+#finds the correct outer class tag for links by finding the highest occurrence class amongst 'a' tags
 def findClass():
     request = re.get('https://medium.com/tag/avax')
     source = request.content
@@ -125,10 +92,6 @@ def findClass():
 def getTime():
     nowdate = datetime.datetime.utcnow()
 
-# def predictTagFilter(tag):
-#     request = re.get('https://medium.com/tag/' + tag + '/top/year')
-#     soup = BeautifulSoup(request.content, 'html.parser')
-#     soup.find('a')
 
 def getHTML(tag):
     options = Options()
